@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 // void main() {
 //   runApp(MyApp());
 // }
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  var questionIndex = 0;
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+// _ is use to indicate private
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
 
   var questionList = [
     "what\" is your first name?",
     "what is your second name?"
   ];
 
-  void answerQuestion() {
-    questionIndex ++;
-    print(questionIndex);
+  void _answerQuestion() {
+    setState(() {
+          _questionIndex ++;
+    });
+    print(_questionIndex);
   }
 
   @override
@@ -28,8 +38,8 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(questionList[questionIndex]),
-            RaisedButton(child: Text("Answer 1"), onPressed: answerQuestion,),
+            Question(questionList[_questionIndex]),
+            RaisedButton(child: Text("Answer 1"), onPressed: _answerQuestion,),
             RaisedButton(child: Text("Answer 2"), onPressed: () => print("anonymous print"),),
             RaisedButton(child: Text("Answer 3"), onPressed: () {
               print("in curly braces");
@@ -39,5 +49,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
 }
