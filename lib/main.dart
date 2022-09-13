@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -18,8 +19,15 @@ class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
   var questionList = [
-    "what\" is your first name?",
-    "what is your second name?"
+    {'questionText': 'what\'s your favorite food?',
+      'answers': ['rice', 'momo', 'chowmein']
+    },
+    {'questionText': 'what is your first name?',
+      'answers': ['jake', 'mira', 'max']
+    },
+    {'questionText': 'what is your second name?',
+      'answers': ['shrestha', 'bhatt', 'rai']
+    }
   ];
 
   void _answerQuestion() {
@@ -38,12 +46,15 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Question(questionList[_questionIndex]),
-            RaisedButton(child: Text("Answer 1"), onPressed: _answerQuestion,),
-            RaisedButton(child: Text("Answer 2"), onPressed: () => print("anonymous print"),),
-            RaisedButton(child: Text("Answer 3"), onPressed: () {
-              print("in curly braces");
-            }),
+            Question(questionList[_questionIndex]['questionText'] as String),
+            // RaisedButton(child: Text("Answer 1"), onPressed: _answerQuestion,),
+            // RaisedButton(child: Text("Answer 2"), onPressed: () => print("anonymous print"),),
+            // RaisedButton(child: Text("Answer 3"), onPressed: () {
+            //   print("in curly braces");
+            // }),
+            ...(questionList[_questionIndex]['answers'] as List<String>).map((answer){
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
