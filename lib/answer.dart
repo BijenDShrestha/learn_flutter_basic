@@ -7,7 +7,7 @@ class Answer extends StatelessWidget {
   // const Answer({Key? key}) : super(key: key);
 
   // final Function answerHandler;
-  final VoidCallback answerHandler;
+  final Function answerHandler;
   final String answer;
 
   Answer(this.answerHandler, this.answer);
@@ -20,8 +20,8 @@ class Answer extends StatelessWidget {
         color: Colors.blue,
         textColor: Colors.white,
         child: Text(answer),
-        onPressed: answerHandler,
-        ),
+        onPressed: answerHandler(),
+      ),
     );
   }
 }

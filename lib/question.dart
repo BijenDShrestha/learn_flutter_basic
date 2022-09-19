@@ -8,7 +8,7 @@ class Question extends StatelessWidget {
 
   final String questiontext;
 
-  Question(this.questiontext); 
+  Question(this.questiontext);
 
   @override
   Widget build(BuildContext context) {

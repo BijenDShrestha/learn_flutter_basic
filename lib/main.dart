@@ -17,26 +17,49 @@ class MyApp extends StatefulWidget {
 // _ is use to indicate private
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+  var _totalScore = 0;
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
 
   final _questionList = const [
     {
       'questionText': 'what\'s your favorite food?',
-      'answers': ['rice', 'momo', 'chowmein']
+      'answers': [
+        {'text': 'rice', 'score': 5},
+        {'text': 'momo', 'score': 1},
+        {'text': 'chowmein', 'score': 3},
+      ],
     },
     {
       'questionText': 'what is your first name?',
-      'answers': ['jake', 'mira', 'max']
+      'answers': [
+        {'text': 'jack', 'score': 5},
+        {'text': 'marie', 'score': 5},
+        {'text': 'bob', 'score': 5},
+      ],
     },
     {
       'questionText': 'what is your second name?',
-      'answers': ['shrestha', 'bhatt', 'rai']
+      'answers': [
+        {'text': 'shrestha', 'score': 5},
+        {'text': 'williams', 'score': 5},
+        {'text': 'brown', 'score': 5},
+      ],
     }
   ];
 
-  void _answerQuestion() {
-    if (_questionIndex < _questionList.length) {
-      print("if else statement");
-    }
+  void _answerQuestion(int score) {
+    // if (_questionIndex < _questionList.length) {
+    //   print("if else statement");
+    // }
+
+    _totalScore += score;
+
     setState(() {
       _questionIndex++;
     });
@@ -51,8 +74,11 @@ class _MyAppState extends State<MyApp> {
           title: Text("This is app bar"),
         ),
         body: _questionIndex < _questionList.length
-            ? Quiz(questionList: _questionList, questionIndex: _questionIndex, answerQuestion: _answerQuestion)
-            : Result()
+            ? Quiz(
+                questionList: _questionList,
+                questionIndex: _questionIndex,
+                answerQuestion: _answerQuestion)
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
